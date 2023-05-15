@@ -11,29 +11,35 @@ and the Flutter guide for
 [developing packages and plugins](https://flutter.dev/developing-packages). 
 -->
 
-TODO: Put a short description of the package here that helps potential users
-know whether this package might be useful for them.
+# Protocol Definition Script
+
+Protocol Definition Script (PDS) is a language for defining the data models, communication protocols, and APIs for online
+distributed systems. PDS is currently in development.
 
 ## Features
 
-TODO: List what your package can do. Maybe include images, gifs, or videos.
+* Language-independent data models.
+* Technology-agnostic web service & API definition.
+* Easy-to-use cross platform editor with syntax highlighting, error detection, and more.
 
 ## Getting started
 
-TODO: List prerequisites and provide or point to information on how to
-start using the package.
+The language is in development, and a guide on how to use the language and its interpreter will be available soon.
 
-## Usage
+[//]: # (## Usage)
 
-TODO: Include short and useful examples for package users. Add longer examples
-to `/example` folder. 
+[//]: # ()
+[//]: # (TODO: Include short and useful examples for package users. Add longer examples)
 
-```dart
-const like = 'sample';
-```
+[//]: # (to `/example` folder. )
+
+[//]: # ()
+[//]: # (```dart)
+
+[//]: # (const like = 'sample';)
+
+[//]: # (```)
 
 ## Additional information
 
-TODO: Tell users more about the package: where to find more information, how to 
-contribute to the package, how to file issues, what response they can expect 
-from the package authors, and more.
+If you think you can contribute to PDS, please send me a message or create an issue in this repository.
