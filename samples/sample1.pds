@@ -1,0 +1,237 @@
+//Athlos Backend Definition Language Superset
+//v0.0.1
+//17-09-2022
+
+default meta metaType;
+
+@metaType
+default enum IDE {
+    INTELLIJ,
+    VS_CODE
+    ;
+}
+
+@metaType
+default enum Client {
+    JAVA8,
+    WEB
+    ;
+}
+
+@metaType
+default enum Server {
+    JAVA8,
+    NODE_JS
+    ;
+}
+
+@metaType
+default enum Deployment {
+    DEDICATED,
+    APP_ENGINE_FLEX,
+    APP_ENGINE_STD,
+    GCP_CLOUD_FUNCTIONS
+    ;
+}
+
+@metaType
+default enum WorldType {
+    UNIFORM,
+    GRID4,
+    GRID6
+    ;
+}
+
+@metaType
+default enum DAOPolicy {
+    NONE,
+    UNIQUE,
+    MULTIPLE
+    ;
+}
+
+default enum Direction4 {
+    NORTH,
+    EAST,
+    SOUTH,
+    WEST
+    ;
+}
+
+default enum Direction6 {
+    NORTH6,
+    NORTH_EAST,
+    SOUTH_EAST,
+    SOUTH6,
+    SOUTH_WEST,
+    NORTH_WEST
+    ;
+}
+
+default enum Movement4 {
+    FORWARD,
+    BACKWARD,
+    LEFTWARD,
+    RIGHTWARD
+    ;
+}
+
+default enum Movement6 {
+    FORWARD6,
+    FORWARD_RIGHT,
+    BACKWARD_RIGHT,
+    BACKWARD6,
+    BACKWARD_LEFT,
+    FORWARD_LEFT
+    ;
+}
+
+default enum Rotation {
+    CLOCKWISE,
+    COUNTERCLOCKWISE
+    ;
+}
+
+default meta isWorldSpecific;
+default meta daoPolicy : DAOPolicy;
+
+@daoPolicy = DAOPolicy.NONE
+default class MatrixPosition {
+    long row;
+    long col;
+}
+
+@daoPolicy = DAOPolicy.NONE
+default class GeoPosition {
+    float x;
+    float y;
+    float z;
+}
+
+@daoPolicy = DAOPolicy.NONE
+default class Identifiable {
+    string id;
+}
+
+@daoPolicy = DAOPolicy.NONE
+default class World : Identifiable {
+    WorldType type;
+    string name;
+    long seed;
+    ulong createdOn;
+    List<string> chunkIDs;
+    uint heightLimit;
+    long maxRows;
+    long maxCols;
+    string ownerID;
+    List<string> subscribedSessionIDs;
+}
+
+@isWorldSpecific
+@daoPolicy = DAOPolicy.NONE
+default class TerrainCell {
+    MatrixPosition position;
+}
+
+@isWorldSpecific
+@daoPolicy = DAOPolicy.NONE
+default class TerrainChunk : Identifiable {
+    Map<string, TerrainCell> cells;
+    string worldID;
+    MatrixPosition position;
+}
+
+@daoPolicy = DAOPolicy.NONE
+default class Player : Identifiable {
+    string name;
+    string teamID;
+    ulong createdOn;
+}
+
+@daoPolicy = DAOPolicy.NONE
+default class Team : Identifiable {
+    string name;
+    uint playerLimit;
+    List<string> playerIDs;
+    string ownerID;
+}
+
+@daoPolicy = DAOPolicy.NONE
+default class Entity : Identifiable {
+    string worldID;
+    string playerID;
+    float areaOfInterest;
+    //position...
+    //direction...
+}
+
+@daoPolicy = DAOPolicy.NONE
+default class GameSession : Identifiable {
+    string playerID;
+    string ipAddress;
+    ulong createdOn;
+    ulong expiresOn;
+}
+
+@daoPolicy = DAOPolicy.NONE
+default class WorldSession : GameSession {
+    string worldID;
+    //posiiton cameraPosition...
+}
+
+@daoPolicy = DAOPolicy.NONE
+default class PartialState {
+    WorldSession worldSession;
+    Map<string, Entity> entities;
+    Map<string, TerrainCell> terrain;
+    ulong timestamp;
+}
+
+@daoPolicy = DAOPolicy.NONE
+default class StateUpdate {
+    string worldSessionID;
+    PartialState partialState;
+    List<string> removedTerrain;
+    List<string> removedEntities;
+    ulong timestamp;
+}
+
+@daoPolicy = DAOPolicy.NONE
+default class TerrainIdentifier : Identifiable {
+    string chunkID;
+    string worldID;
+    MatrixPosition chunkPosition;
+}
+
+@daoPolicy = DAOPolicy.NONE
+default class TerrainGenerator {
+    World world;
+}
+
+default data Game {
+    string name;
+    string devName;
+    string shortName;
+    string namespace;
+    string protoName;
+    Server server;
+    List<Client> clients;
+    Deployment deployment;
+    ~int chunkSize = 16;
+    WorldType worldType;
+    World world;
+    //TODO other attributes
+}
+
+Game game = {
+    name: "MyGame",
+    devName: "MyGame",
+    shortName: "MyGame",
+    namespace: "MG",
+    protoName: "MyGameProto",
+    server: Server.JAVA8,
+    clients: [Client.JAVA8],
+    deployment: Deployment.DEDICATED,
+    worldType: WorldType.UNIFORM,
+    world: World
+}
