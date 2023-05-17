@@ -1,26 +1,26 @@
-import 'model/ApplicationDefinition.dart';
+import 'model/protocol_definition.dart';
 
 class PDSInterpreter {
 
   /// Interprets a BDL file and returns a definition.
-  static ApplicationDefinition interpretFile(String filename) {
+  static ProtocolDefinition interpretFile(String filename) {
     //TODO - Implement
-    return ApplicationDefinition();
+    return ProtocolDefinition();
   }
 
   /// Interprets a BDL string and returns a definition.
-  static ApplicationDefinition interpretString(String bdlContent) {
+  static ProtocolDefinition interpretString(String bdlContent) {
     //TODO - Implement
-    return ApplicationDefinition();
+    return ProtocolDefinition();
   }
 
   /// Converts a definition into BDL language format and saves it into a file.
-  static saveToFile(String filename, ApplicationDefinition definition) {
+  static saveToFile(String filename, ProtocolDefinition definition) {
     //TODO - Implement
   }
 
   /// Converts a definition into BDL language format and stores it in a string variable.
-  static String toBDLString(ApplicationDefinition definition) {
+  static String toBDLString(ProtocolDefinition definition) {
     //TODO - Implement
     return "";
   }

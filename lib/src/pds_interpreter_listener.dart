@@ -2,8 +2,19 @@ import 'package:antlr4/src/parser_rule_context.dart';
 import 'package:antlr4/src/tree/src/tree.dart';
 import 'package:pds_dart/src/antlr4/PDSBaseListener.dart';
 import 'package:pds_dart/src/antlr4/PDSParser.dart';
+import 'package:pds_dart/src/model/errors.dart';
+import 'package:pds_dart/src/model/protocol_definition.dart';
+
+import 'model/type_system/annotation_type.dart';
 
 class PDSInterpreterListener implements PDSBaseListener {
+
+  ProtocolDefinition protocolDefinition = ProtocolDefinition();
+  List<PDSError> errors = [];
+  String filename;
+
+  PDSInterpreterListener(this.filename);
+
   @override
   void enterAccessModifier(AccessModifierContext ctx) {
     // TODO: implement enterAccessModifier
@@ -11,12 +22,33 @@ class PDSInterpreterListener implements PDSBaseListener {
 
   @override
   void enterAnnotation(AnnotationContext ctx) {
-    // TODO: implement enterAnnotation
+
   }
 
   @override
   void enterAnnotationDeclaration(AnnotationDeclarationContext ctx) {
-    // TODO: implement enterAnnotationDeclaration
+    bool isDefault = ctx.Default() != null;
+    String? name = ctx.Identifier()!.text;
+
+    //TODO - Verify name here.
+
+    AnnotationTypeValueType type;
+
+    if (ctx.annotationType()!.basicType() != null) {
+      type = AnnotationTypeValueType.basicType;
+    }
+    else if (ctx.annotationType()!.Identifier() != null) {
+      type = AnnotationTypeValueType.identifier;
+    }
+    else if (ctx.annotationType()!.Class() != null) {
+      type = AnnotationTypeValueType.classReflector;
+    }
+    else {
+      type = AnnotationTypeValueType.none;
+    }
+    AnnotationType annotation = AnnotationType(name, isDefault, type);
+    protocolDefinition.annotations[name!] = annotation;
+    protocolDefinition.identifierRegistry.add(name);
   }
 
   @override
@@ -30,8 +62,25 @@ class PDSInterpreterListener implements PDSBaseListener {
   }
 
   @override
-  void enterClassDeclaration(ClassDeclarationContext ctx) {
-    // TODO: implement enterClassDeclaration
+  void enterClassDeclaration(ClassDeclarationContext classDeclarationCtx) {
+
+    //Annotations:
+    classDeclarationCtx.annotations().forEach((annotationCtx) {
+      String? identifier = annotationCtx.Identifier()!.text;
+      AnnotationType? annotation = protocolDefinition.annotations[identifier];
+      if (annotation == null) {
+        errors.add(PDSError(ErrorType.error, "Could not find annotation '${identifier!}'.", filename, annotationCtx.start!.line!, annotationCtx.start!.charPositionInLine!));
+      }
+      if (annotationCtx.value() != null) {
+
+      }
+      else {
+
+      }
+    });
+
+
+
   }
 
   @override

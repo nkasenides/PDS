@@ -78,10 +78,8 @@ dataType:
 basicType:
     INT_TYPE |
     UNSIGNED_INT_TYPE |
-    SIGNED_INT_TYPE |
     LONG_TYPE |
     UNSIGNED_LONG_TYPE |
-    SIGNED_LONG_TYPE |
     BOOL_TYPE |
     STRING_TYPE |
     DOUBLE_TYPE |
@@ -91,11 +89,9 @@ basicType:
 
 INT_TYPE: 'int' | 'int32';
 UNSIGNED_INT_TYPE: 'uint' | 'uint32';
-SIGNED_INT_TYPE: 'sint' | 'sint32';
 
 LONG_TYPE: 'long' | 'int64';
 UNSIGNED_LONG_TYPE: 'ulong' | 'uint64';
-SIGNED_LONG_TYPE: 'slong' | 'sint64';
 
 BOOL_TYPE: 'bool' | 'boolean';
 STRING_TYPE: 'string';

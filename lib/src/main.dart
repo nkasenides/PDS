@@ -7,7 +7,7 @@ import 'antlr4/PDSParser.dart';
 void main() async {
   PDSLexer.checkVersion();
   PDSParser.checkVersion();
-  final input = await InputStream.fromPath("samples/sample1.pds");
+  final input = await InputStream.fromPath("samples/athlos.pds");
   final lexer = PDSLexer(input);
   final tokens = CommonTokenStream(lexer);
   final parser = PDSParser(tokens);
