@@ -1,16 +1,15 @@
-import 'package:pds_dart/src/model/type_system/data_type.dart';
+import 'data_type.dart';
 
 class AnnotationType extends DataType {
 
-  bool isDefault;
-  AnnotationTypeValueType valueType;
+  AnnotationValueType valueType;
 
-  AnnotationType(name, this.isDefault, this.valueType) : super(name, DataTypeType.classType, false);
+  AnnotationType(String name, this.valueType) : super(name, DataTypeType.annotationType);
 
 }
 
-enum AnnotationTypeValueType {
-  basicType,
+enum AnnotationValueType {
+  basic,
   classReflector,
   identifier,
   none

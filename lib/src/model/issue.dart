@@ -1,4 +1,4 @@
-class PDSError {
+class Issue {
 
   ErrorType type;
   String message;
@@ -6,7 +6,7 @@ class PDSError {
   int line;
   int character;
 
-  PDSError(this.type, this.message, this.filename, this.line, this.character);
+  Issue(this.type, this.message, this.filename, this.line, this.character);
 
 }
 

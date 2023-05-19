@@ -1,17 +1,21 @@
 import 'package:pds_dart/src/model/type_system/annotation_type.dart';
 import 'package:pds_dart/src/model/type_system/class_type.dart';
+import 'package:pds_dart/src/model/type_system/data_type.dart';
 import 'package:pds_dart/src/model/type_system/enum_type.dart';
-import 'package:pds_dart/src/model/type_system/service_type.dart';
+
+import 'issue.dart';
 
 class ProtocolDefinition {
 
-  //TODO - Data objects...
+  String filename;
+  List<Issue> errors = [];
 
-  Map<String, AnnotationType> annotations = {};
-  Map<String, EnumType> enums = {};
+  ProtocolDefinition(this.filename);
+
   Map<String, ClassType> classes = {};
-  Map<String, ServiceType> services = {};
+  Map<String, EnumType> enums = {};
+  Map<String, AnnotationType> annotations = {};
 
-  Set<String> identifierRegistry = {};
-  
+  Map<String, DataType> identifierRegistry = {};
+
 }

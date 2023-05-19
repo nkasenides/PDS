@@ -2,31 +2,31 @@
 //v0.0.1
 //17-09-2022
 
-default meta metaType;
+meta metaType;
 
 @metaType
-default enum IDE {
+enum IDE {
     INTELLIJ,
     VS_CODE
     ;
 }
 
 @metaType
-default enum Client {
+enum Client {
     JAVA8,
     WEB
     ;
 }
 
 @metaType
-default enum Server {
+enum Server {
     JAVA8,
     NODE_JS
     ;
 }
 
 @metaType
-default enum Deployment {
+enum Deployment {
     DEDICATED,
     APP_ENGINE_FLEX,
     APP_ENGINE_STD,
@@ -35,7 +35,7 @@ default enum Deployment {
 }
 
 @metaType
-default enum WorldType {
+enum WorldType {
     UNIFORM,
     GRID4,
     GRID6
@@ -43,14 +43,14 @@ default enum WorldType {
 }
 
 @metaType
-default enum DAOPolicy {
+enum DAOPolicy {
     NONE,
     UNIQUE,
     MULTIPLE
     ;
 }
 
-default enum Direction4 {
+enum Direction4 {
     NORTH,
     EAST,
     SOUTH,
@@ -58,7 +58,7 @@ default enum Direction4 {
     ;
 }
 
-default enum Direction6 {
+enum Direction6 {
     NORTH6,
     NORTH_EAST,
     SOUTH_EAST,
@@ -68,7 +68,7 @@ default enum Direction6 {
     ;
 }
 
-default enum Movement4 {
+enum Movement4 {
     FORWARD,
     BACKWARD,
     LEFTWARD,
@@ -76,7 +76,7 @@ default enum Movement4 {
     ;
 }
 
-default enum Movement6 {
+enum Movement6 {
     FORWARD6,
     FORWARD_RIGHT,
     BACKWARD_RIGHT,
@@ -86,35 +86,35 @@ default enum Movement6 {
     ;
 }
 
-default enum Rotation {
+enum Rotation {
     CLOCKWISE,
     COUNTERCLOCKWISE
     ;
 }
 
-default meta isWorldSpecific;
-default meta daoPolicy : DAOPolicy;
+meta isWorldSpecific;
+meta daoPolicy : DAOPolicy;
 
 @daoPolicy = DAOPolicy.NONE
-default class MatrixPosition {
+class MatrixPosition {
     long row;
     long col;
 }
 
 @daoPolicy = DAOPolicy.NONE
-default class GeoPosition {
+class GeoPosition {
     float x;
     float y;
     float z;
 }
 
 @daoPolicy = DAOPolicy.NONE
-default class Identifiable {
+class Identifiable {
     string id;
 }
 
 @daoPolicy = DAOPolicy.NONE
-default class World : Identifiable {
+class World : Identifiable {
     WorldType type;
     string name;
     long seed;
@@ -129,27 +129,27 @@ default class World : Identifiable {
 
 @isWorldSpecific
 @daoPolicy = DAOPolicy.NONE
-default class TerrainCell {
+class TerrainCell {
     MatrixPosition position;
 }
 
 @isWorldSpecific
 @daoPolicy = DAOPolicy.NONE
-default class TerrainChunk : Identifiable {
+class TerrainChunk : Identifiable {
     Map<string, TerrainCell> cells;
     string worldID;
     MatrixPosition position;
 }
 
 @daoPolicy = DAOPolicy.NONE
-default class Player : Identifiable {
+class Player : Identifiable {
     string name;
     string teamID;
     ulong createdOn;
 }
 
 @daoPolicy = DAOPolicy.NONE
-default class Team : Identifiable {
+class Team : Identifiable {
     string name;
     uint playerLimit;
     List<string> playerIDs;
@@ -157,7 +157,7 @@ default class Team : Identifiable {
 }
 
 @daoPolicy = DAOPolicy.NONE
-default class Entity : Identifiable {
+class Entity : Identifiable {
     string worldID;
     string playerID;
     float areaOfInterest;
@@ -166,7 +166,7 @@ default class Entity : Identifiable {
 }
 
 @daoPolicy = DAOPolicy.NONE
-default class GameSession : Identifiable {
+class GameSession : Identifiable {
     string playerID;
     string ipAddress;
     ulong createdOn;
@@ -174,13 +174,13 @@ default class GameSession : Identifiable {
 }
 
 @daoPolicy = DAOPolicy.NONE
-default class WorldSession : GameSession {
+class WorldSession : GameSession {
     string worldID;
     //posiiton cameraPosition...
 }
 
 @daoPolicy = DAOPolicy.NONE
-default class PartialState {
+class PartialState {
     WorldSession worldSession;
     Map<string, Entity> entities;
     Map<string, TerrainCell> terrain;
@@ -188,7 +188,7 @@ default class PartialState {
 }
 
 @daoPolicy = DAOPolicy.NONE
-default class StateUpdate {
+class StateUpdate {
     string worldSessionID;
     PartialState partialState;
     List<string> removedTerrain;
@@ -197,18 +197,18 @@ default class StateUpdate {
 }
 
 @daoPolicy = DAOPolicy.NONE
-default class TerrainIdentifier : Identifiable {
+class TerrainIdentifier : Identifiable {
     string chunkID;
     string worldID;
     MatrixPosition chunkPosition;
 }
 
 @daoPolicy = DAOPolicy.NONE
-default class TerrainGenerator {
+class TerrainGenerator {
     World world;
 }
 
-default data Game {
+data Game {
     string name;
     string devName;
     string shortName;

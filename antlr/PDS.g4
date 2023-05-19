@@ -18,7 +18,7 @@ imports: importStatement*;
 
 importStatement: 'import' StringLiteral Semicolon;
 
-dataDeclaration: Default? 'data' Identifier BlockStart dataAttributeDefinition* BlockEnd;
+dataDeclaration: 'data' Identifier BlockStart dataAttributeDefinition* BlockEnd;
 
 dataAttributeDefinition:
     normalDataAttributeDefinition |
@@ -37,17 +37,17 @@ dataAttribute: Identifier Colon value;
 
 annotation: ((At Identifier Assignment value) | (At Identifier));
 
-annotationDeclaration: Default? 'meta' Identifier (Colon annotationType)? Semicolon;
+annotationDeclaration: 'meta' Identifier (Colon annotationType)? Semicolon;
 
-classDeclaration: annotation* Default? 'class' Identifier classExtension? BlockStart classElementDeclaration* BlockEnd;
+classDeclaration: annotation* 'class' Identifier classExtension? BlockStart classElementDeclaration* BlockEnd;
 
 classElementDeclaration: fieldDeclaration | functionDeclaration;
 
 classExtension: Colon Identifier;
 
-enumDeclaration: annotation* Default? 'enum' Identifier BlockStart enumValues BlockEnd;
+enumDeclaration: annotation* 'enum' Identifier BlockStart enumValues BlockEnd;
 
-serviceDeclaration: annotation* Default? 'service' Identifier requestBlock ServiceType responseBlock Semicolon;
+serviceDeclaration: annotation* 'service' Identifier requestBlock ServiceType responseBlock Semicolon;
 
 requestBlock: LeftParen Identifier RightParen;
 
@@ -115,7 +115,6 @@ accessModifier: Plus | Minus;
 
 optional: Tilde;
 
-Default: 'default';
 DAOPolicyUnique: 'unique';
 DAOPolicyNone: 'none';
 DAOPolicyMultiple: 'multiple';

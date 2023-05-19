@@ -5,13 +5,13 @@ class PDSInterpreter {
   /// Interprets a BDL file and returns a definition.
   static ProtocolDefinition interpretFile(String filename) {
     //TODO - Implement
-    return ProtocolDefinition();
+    return ProtocolDefinition(filename);
   }
 
   /// Interprets a BDL string and returns a definition.
   static ProtocolDefinition interpretString(String bdlContent) {
     //TODO - Implement
-    return ProtocolDefinition();
+    return ProtocolDefinition("<main>");
   }
 
   /// Converts a definition into BDL language format and saves it into a file.
