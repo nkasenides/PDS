@@ -57,7 +57,7 @@ class PDSParser extends Parser {
   ];
 
   static final List<String?> _LITERAL_NAMES = [
-      null, "'import'", "'data'", "'meta'", "'enum'", "'service'", null, 
+      null, "'import'", "'config'", "'meta'", "'enum'", "'service'", null, 
       null, null, null, null, "'string'", "'double'", "'float'", "'bytes'", 
       null, "'unique'", "'none'", "'multiple'", "'~'", "'+'", "'-'", "'*'", 
       "'.'", "':'", "'='", "';'", "'{'", "'}'", "'['", "']'", "'('", "')'", 

@@ -1,7 +1,7 @@
 token literal names:
 null
 'import'
-'data'
+'config'
 'meta'
 'enum'
 'service'

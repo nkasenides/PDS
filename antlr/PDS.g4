@@ -18,7 +18,7 @@ imports: importStatement*;
 
 importStatement: 'import' StringLiteral Semicolon;
 
-dataDeclaration: 'data' Identifier BlockStart dataAttributeDefinition* BlockEnd;
+dataDeclaration: 'config' Identifier BlockStart dataAttributeDefinition* BlockEnd;
 
 dataAttributeDefinition:
     normalDataAttributeDefinition |
